@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "nodemon --watch ./src -e js src/index.js",
+    "run": "node src/index.js",
     "test": "mocha --timeout 10000 && npm run lint",
     "lint": "eslint ."
   },
@@ -26,6 +27,7 @@
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
+    "dotenv": "^6.2.0",
     "express": "^4.15.5",
     "express-validation": "^1.0.2",
     "joi": "^11.1.1",
