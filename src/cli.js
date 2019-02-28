@@ -3,7 +3,7 @@
 // opts must be a base 64 encoded json string and include url and pdf.path for output
 const renderCore = require('./core/render-core');
 
-if (!process.argv.length !== 3) {
+if (process.argv.length !== 3) {
   console.log('usage:\n$ node src/cli.js <opts>\nopts must be a base 64 encoded json string and include url and pdf.path for output');
   process.exit();
 }
