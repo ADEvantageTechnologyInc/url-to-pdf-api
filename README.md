@@ -284,6 +284,22 @@ curl -o receipt.html https://rawgit.com/wildbit/postmark-templates/master/templa
 curl -o html.pdf -XPOST -d@receipt.html -H"content-type: text/html" https://url-to-pdf-api.herokuapp.com/api/render?pdf.scale=1
 ```
 
+## CLI
+
+If you are looking to run this api locally without having to have a node server running, a cli.js has been added to do just that.
+
+**Example:**
+
+```bash
+$ node src/cli.js <opts>
+```
+
+`<opts>` is a base 64 encoded json string. It matches the same json options that can be sent in a POST request. It must include url and pdf.path for output. Here's an example to render a pdf of google.com to google.pdf:
+
+```bash
+$ node src/cli.js eyJ1cmwiOiJodHRwczpcL1wvZ29vZ2xlLmNvbVwvIiwicGRmIjp7InBhdGgiOiJnb29nbGUucGRmIn19
+```
+
 ## Development
 
 To get this thing running, you have two options: run it in Heroku, or locally.
