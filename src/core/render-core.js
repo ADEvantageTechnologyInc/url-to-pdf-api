@@ -75,7 +75,13 @@ async function render(_opts = {}) {
   if (opts.request) {
     await page.setRequestInterception(true);
     page.on('request', (request) => {
-      request.continue(opts.request);
+      // only modify initial request, so additional requests for assets (js css) are not modified
+      if (!opts.request_called) {
+        opts.request_called = true;
+        request.continue(opts.request);
+      } else {
+        request.continue({});
+      }
     });
   }
 
@@ -109,7 +115,11 @@ async function render(_opts = {}) {
 
     if (_.isNumber(opts.waitFor) || _.isString(opts.waitFor)) {
       logger.info(`Wait for ${opts.waitFor} ..`);
-      await page.waitFor(opts.waitFor);
+      if (opts.goto && Object.prototype.hasOwnProperty.call(opts.goto, 'timeout')) {
+        await page.waitFor(opts.waitFor, { timeout: opts.goto.timeout });
+      } else {
+        await page.waitFor(opts.waitFor);
+      }
     }
 
     if (opts.scrollPage) {
